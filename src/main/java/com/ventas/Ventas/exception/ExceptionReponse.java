@@ -1,16 +1,28 @@
 package com.ventas.Ventas.exception;
 
 import java.util.Date;
+import java.util.Map;
 
 public class ExceptionReponse {
     private Date timestamp;
     private String mensaje;
     private String detalles;
+    private Map<String,String> erroresValidacion;
+
+    public ExceptionReponse() {
+    }
 
     public ExceptionReponse(Date timestamp, String mensaje, String detalles) {
         this.timestamp = timestamp;
         this.mensaje = mensaje;
         this.detalles = detalles;
+    }
+
+    public ExceptionReponse(Date timestamp, String mensaje, String detalles, Map<String, String> erroresValidacion) {
+        this.timestamp = timestamp;
+        this.mensaje = mensaje;
+        this.detalles = detalles;
+        this.erroresValidacion = erroresValidacion;
     }
 
     public Date getTimestamp() {
@@ -35,5 +47,13 @@ public class ExceptionReponse {
 
     public void setDetalles(String detalles) {
         this.detalles = detalles;
+    }
+
+    public Map<String, String> getErroresValidacion() {
+        return erroresValidacion;
+    }
+
+    public void setErroresValidacion(Map<String, String> erroresValidacion) {
+        this.erroresValidacion = erroresValidacion;
     }
 }
