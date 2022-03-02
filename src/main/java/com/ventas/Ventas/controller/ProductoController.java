@@ -42,7 +42,7 @@ public class ProductoController {
                 .orElseGet(()->ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable("id") Integer idProducto){
         return productoService.findById(idProducto)
                 .map(p->{

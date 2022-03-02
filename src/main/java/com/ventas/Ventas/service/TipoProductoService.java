@@ -3,10 +3,12 @@ package com.ventas.Ventas.service;
 import com.ventas.Ventas.model.TipoProducto;
 import com.ventas.Ventas.repository.ITipoProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class TipoProductoService implements ICRUDService<TipoProducto>{
 
     @Autowired

@@ -1,6 +1,5 @@
 package com.ventas.Ventas.controller;
 
-import com.ventas.Ventas.model.Producto;
 import com.ventas.Ventas.model.TipoProducto;
 import com.ventas.Ventas.service.TipoProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
