@@ -6,6 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name= "cliente")
@@ -15,25 +16,11 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCliente;
 
-    @NotNull(message = "El nombre no puede ser nulo")
-    @NotBlank(message= "El nombre es obligatorio")
-    @Size(min=3,max=70,message = "El nombre debe ser mayor a tres caracteres")
-    @Column(name= "nombres", nullable = false, length = 70)
-    private String nombres;
+    @Column(length = 20)
+    private String nit;
 
-    @NotNull(message = "El apellido no puede ser nulo")
-    @NotBlank(message= "Los apellidos son obligatorios")
-    @Size(min=3,max=70,message = "Los apellidos deben ser mayor a tres caracteres")
-    @Column(name= "apellidos", nullable = false, length = 150)
-    private String apellidos;
-
-    @Size(max=150,message = "La direccion no debe superar los 150 caracteres")
-    @Column(name= "direccion", nullable = true, length = 150)
-    private String direccion;
-
-    @Size(min=8,message = "El telefono debe tener al menos 8 digitos")
-    @Column(name= "telefono", nullable = true, length = 10)
-    private String telefono;
+    @Column(length = 100)
+    private String razonSocial;
 
     @NotNull
     @NotBlank(message="El email es obligatorio")
@@ -41,6 +28,10 @@ public class Cliente {
     @Email(message = "El email enviado no es un formato valido")
     @Column(name= "email", nullable = false, length = 150)
     private String email;
+
+    @OneToOne
+    @JoinColumn(name="id_persona",nullable = false)
+    private Persona persona;
 
     public Integer getIdCliente() {
         return idCliente;
@@ -50,36 +41,20 @@ public class Cliente {
         this.idCliente = idCliente;
     }
 
-    public String getNombres() {
-        return nombres;
+    public String getNit() {
+        return nit;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
+    public void setNit(String nit) {
+        this.nit = nit;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getRazonSocial() {
+        return razonSocial;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
     }
 
     public String getEmail() {
@@ -88,5 +63,26 @@ public class Cliente {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Persona getIdPersona() {
+        return persona;
+    }
+
+    public void setIdPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(idCliente, cliente.idCliente);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idCliente);
     }
 }
