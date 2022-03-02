@@ -2,6 +2,7 @@ package com.ventas.Ventas.controller;
 
 import com.ventas.Ventas.model.Cliente;
 import com.ventas.Ventas.service.ClienteService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ public class ClienteController {
 
     @GetMapping
     public ResponseEntity<List<Cliente>> findAll(){
+
         return ResponseEntity.ok(clienteService.findAll());
     }
 
@@ -43,15 +45,26 @@ public class ClienteController {
 
     }
 
+
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Cliente> delete(@PathVariable("id") Integer idCliente){
+//        return clienteService.findById(idCliente)
+//                .map(c-> {
+//                    clienteService.delete(idCliente);
+//                    return ResponseEntity.ok(c);
+//                })
+//                .orElseGet(()->ResponseEntity.notFound().build());
+//    }
+
+    @Operation(summary = "Elimina un cliente")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Cliente> delete(@PathVariable("id") Integer idCliente){
+    public ResponseEntity<Object> delete(@PathVariable("id") Integer idCliente){
         return clienteService.findById(idCliente)
                 .map(c-> {
                     clienteService.delete(idCliente);
-                    return ResponseEntity.ok(c);
+                    return ResponseEntity.ok().build();
                 })
                 .orElseGet(()->ResponseEntity.notFound().build());
     }
-
 
 }
